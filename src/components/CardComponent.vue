@@ -17,20 +17,15 @@ const imgUrl = `https://image.tmdb.org/t/p/w500${card.card.poster_path}`;
     <div class="card d-flex flex-column h-100">
         <img :src="imgUrl" class="card-img-top" :alt="card.card.title">
         <div class="card-body bg-dark text-white d-flex flex-column justify-content-between">
-            <h5 class="card-title">
+            <span>
                 {{ card.card.title }}
-            </h5>
+            </span>
             <p class="card-text">
                 {{ card.card.release_date }}
             </p>
             <button class="btn btn-primary w-100 w-sm-auto" type="button">
-                Ver detalhes
+                Mais informações
             </button>
-            <!-- <div class="card-footer mt-auto">
-                <button class="btn btn-primary w-100 w-sm-auto" type="button">
-                    Ver detalhes
-                </button>
-            </div> -->
         </div>
     </div>
 </template>
