@@ -1,27 +1,27 @@
 import { defineStore } from "pinia";
 import { api } from "../services/api";
 
-export const useFilmeStore = defineStore('filmeStore', {
-    state: () => ({
-        filmes: [] as Array<{
+export const useSerieStore = defineStore('series', {
+    state:() => ({
+        series: [] as Array<{
             id: number,
             poster_path: string,
-            release_date: string,
-            title: string
+            first_air_date: string,
+            name: string
         }>,
         currentPage: 1,
         totalPages: 1,
         loading: true,
     }),
     actions: {
-        async fetchFilmes(): Promise<void> {
+        async fetchSeries(): Promise<void> {
             this.loading = true;
             try {
-                const response = await api.get('/movie/popular');
+                const response = await api.get('/tv/popular');
                 console.log('RESPONSE ', response.data);
-                this.filmes = response.data.results;
+                this.series = response.data.results;
             } catch(error) {
-                console.error('Erro ao carregar os filmes ', error);
+                console.error('Falha ao carregar as séries ', error);
             } finally {
                 this.loading = false;
             }

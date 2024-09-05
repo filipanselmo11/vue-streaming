@@ -1,10 +1,27 @@
 <script lang="ts" setup>
 import { onMounted } from 'vue';
 import { useFilmeStore } from '../stores/filmesStore';
+import { useRouter } from 'vue-router';
 import CardComponent from '../components/CardComponent.vue';
-
+import NavComponent from '../components/NavComponent.vue';
 
 const filmeStore = useFilmeStore();
+
+// const currentPage = computed(() => filmeStore.currentPage);
+// const totalPages = computed(() => filmeStore.totalPages);
+
+const router = useRouter();
+
+const goFilmesPage = () => {
+    router.push('/filmes');
+};
+const goHomePage = () => {
+    router.push('/')
+};
+const goSeriesPage = () => {
+    router.push('/series');
+};
+// const goFavsPage = () => {};
 
 onMounted(() => {
     filmeStore.fetchFilmes();
@@ -13,6 +30,11 @@ onMounted(() => {
 </script>
 
 <template>
+    <NavComponent
+        @home-click="goHomePage"
+        @filmes-click="goFilmesPage"
+        @series-click="goSeriesPage"
+    /> 
     <main class="container mt-5">
         <h2 class="h2 mb-4">
             Filmes:

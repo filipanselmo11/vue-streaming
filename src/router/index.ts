@@ -7,7 +7,7 @@ import Series from "../pages/series.vue";
 
 const routes = [
     {
-        path: '',
+        path: '/',
         component: Home
     },
     {
@@ -17,7 +17,7 @@ const routes = [
     {
         path: '/series',
         component: Series
-    }
+    },
 ];
 
 const router = createRouter({
