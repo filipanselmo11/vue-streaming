@@ -1,11 +1,27 @@
 <script lang="ts" setup>
 
-defineEmits([
-    'homeClick',
-    'filmesClick',
-    'seriesClick',
-    'favClick',
-]);
+const emit = defineEmits<{
+    (e: 'homeClick'): void;
+    (e: 'filmesClick'): void;
+    (e: 'seriesClick'): void;
+    (e: 'favClick'): void;
+}>();
+
+const emitHomeClick = () => {
+    emit('homeClick');
+};
+
+const emitFilmesClick = () => {
+    emit('filmesClick');
+};
+
+const emitSeriesClick = () => {
+    emit('seriesClick');
+};
+
+const emitFavClick = () => {
+    emit('favClick');
+};
 
 </script>
 
@@ -24,22 +40,22 @@ defineEmits([
             <div class="collapse navbar-collapse" id="navbarVueStreaming">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active text-white" aria-current="page" @click="$emit('homeClick', $event)">
+                        <a class="nav-link text-white" aria-current="page" @click.prevent="emitHomeClick()">
                             Início
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" @click="$emit('filmesClick', $event)">
+                        <a class="nav-link text-white" @click="emitFilmesClick()">
                             Filmes
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" @click="$emit('seriesClick', $event)">
+                        <a class="nav-link text-white" @click="emitSeriesClick()">
                             Séries
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white">
+                        <a class="nav-link text-white" @click="emitFavClick()">
                             Favoritos
                         </a>
                     </li>

@@ -14,7 +14,7 @@ const serieStore = useSerieStore();
 const router = useRouter();
 
 const goHomePage = () => {
-    router.push('/')
+    router.push('/');
 };
 
 const goFilmesPage = () => {
@@ -25,6 +25,14 @@ const goSeriesPage = () => {
     router.push('/series');
 };
 
+const goDetalhesFilme = (id: number) => {
+    router.push({ name: 'Detalhes', params: { id, tipo: 'filme'}});
+};
+
+const goDetalhesSerie = (id: number) => {
+    router.push({ name: 'Detalhes', params: { id, tipo: 'serie'}});
+};
+
 onMounted(() => {
     filmeStore.fetchFilmes();
     serieStore.fetchSeries();
@@ -33,9 +41,9 @@ onMounted(() => {
 </script>
 
 <template>
-    <NavComponent @home-click="goHomePage" @filmes-click="goFilmesPage" @series-click="goSeriesPage" />
+    <NavComponent @home-click="goHomePage()" @filmes-click="goFilmesPage()" @series-click="goSeriesPage()" />
     <main class="container mt-5">
-        <div v-if="filmeStore.loading">
+        <div v-if="filmeStore.loading" class="d-flex justify-content-center">
             <LoadComponent />
         </div>
         <div v-else>
@@ -45,22 +53,22 @@ onMounted(() => {
                 </h2>
                 <div class="row row-cols-md-4 row-cols-sm-2 row-cols-1 g-3">
                     <div v-for="filme in filmeStore.filmes" :key="filme.id" class="col">
-                        <CardComponent :card="filme" />
+                        <CardComponent :card="filme" @click-button="goDetalhesFilme(filme.id)"/>
                     </div>
                 </div>
             </section>
         </div>
-        <div v-if="serieStore.loading">
+        <div v-if="serieStore.loading" class="d-flex justify-content-center">
             <LoadComponent />
         </div>
-        <div v-else>
-            <section id="series mt-4">
+        <div v-else class="mt-4">
+            <section id="series">
                 <h2 class="h2">
                     Séries
                 </h2>
                 <div class="row row-cols-md-4 row-cols-sm-2 row-cols-1 g-3">
                     <div v-for="serie in serieStore.series" :key="serie.id" class="col">
-                        <CardComponent :card="serie" />
+                        <CardComponent :card="serie" @click-button="goDetalhesSerie(serie.id)"/>
                     </div>
                 </div>
             </section>

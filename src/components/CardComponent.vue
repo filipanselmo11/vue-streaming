@@ -13,6 +13,14 @@ const card = defineProps<{ card: CardProps }>();
 
 const imgUrl = `https://image.tmdb.org/t/p/w500${card.card.poster_path}`;
 
+const emit = defineEmits<{
+    (e: 'clickButton'): void;
+}>();
+
+const emitClickButton = () => {
+    emit('clickButton');
+};
+
 </script>
 
 <template>
@@ -25,7 +33,10 @@ const imgUrl = `https://image.tmdb.org/t/p/w500${card.card.poster_path}`;
             <p class="card-text">
                 {{ card.card.release_date || card.card.first_air_date }}
             </p>
-            <button class="btn btn-primary w-100 w-sm-auto" type="button">
+            <button
+                class="btn btn-primary w-100 w-sm-auto"
+                type="button"
+                @click.prevent="emitClickButton()">
                 Mais informações
             </button>
         </div>
