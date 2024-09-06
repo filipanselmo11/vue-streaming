@@ -21,6 +21,10 @@ const goSeriesPage = () => {
     router.push({ name: 'Series' });
 };
 
+const goFavoritosPage = () => {
+    router.push({ name: 'Favoritos' });
+};
+
 const assistirTrailer = () => {
     if (serieStore.serie.trailer_link) {
         window.open(serieStore.serie.trailer_link, '_blank');
@@ -37,7 +41,11 @@ onMounted(() => {
 </script>
 
 <template>
-    <NavComponent @home-click="goHomePage()" @filmes-click="goFilmesPage()" @series-click="goSeriesPage()"/>
+    <NavComponent
+        @home-click="goHomePage()"
+        @filmes-click="goFilmesPage()"
+        @series-click="goSeriesPage()"
+        @fav-click="goFavoritosPage()"/>
     <main class="container my-4">
         <h1 class="text-center mb-4">
             Detalhes da Série

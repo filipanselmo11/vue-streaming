@@ -13,15 +13,22 @@ const filmeStore = useFilmeStore();
 const router = useRouter();
 
 const goFilmesPage = () => {
-    router.push('/filmes');
+    router.push({ name: 'Filmes' });
 };
 const goHomePage = () => {
-    router.push('/')
+    router.push({ name: 'Home' });
 };
 const goSeriesPage = () => {
-    router.push('/series');
+    router.push({ name: 'Series' });
 };
-// const goFavsPage = () => {};
+
+const goFavoritosPage = () => {
+    router.push({ name: 'Favoritos' });
+};
+
+const goDetalhesFilme = (id: number) => {
+    router.push({ name: 'Detalhes-Filme', params: { id }});
+};
 
 onMounted(() => {
     filmeStore.fetchFilmes();
@@ -31,9 +38,10 @@ onMounted(() => {
 
 <template>
     <NavComponent
-        @home-click="goHomePage"
-        @filmes-click="goFilmesPage"
-        @series-click="goSeriesPage"
+        @home-click="goHomePage()"
+        @filmes-click="goFilmesPage()"
+        @series-click="goSeriesPage()"
+        @fav-click="goFavoritosPage()"
     /> 
     <main class="container mt-5">
         <h2 class="h2 mb-4">
@@ -41,7 +49,7 @@ onMounted(() => {
         </h2>
         <div class="row row-cols-md-4 row-cols-sm-2 row-cols-1 g-3">
             <div v-for="filme in filmeStore.filmes" :key="filme.id" class="col">
-                <CardComponent :card="filme" />
+                <CardComponent :card="filme" @click-button="goDetalhesFilme(filme.id)"/>
             </div>
         </div>
     </main>

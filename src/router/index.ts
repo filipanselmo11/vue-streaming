@@ -4,6 +4,7 @@ import Home from "../pages/home.vue";
 import Series from "../pages/series.vue";
 import Filme from "../pages/detalhes/filme/[id].vue";
 import Serie from "../pages/detalhes/serie/[id].vue";
+import Favoritos from "../pages/favoritos.vue";
 
 const routes = [
     {
@@ -20,6 +21,11 @@ const routes = [
         path: '/series',
         name: 'Series',
         component: Series
+    },
+    {
+        path: '/favoritos',
+        name: 'Favoritos',
+        component: Favoritos
     },
     {
         path: '/filme/:id',

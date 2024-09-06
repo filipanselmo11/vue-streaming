@@ -1,10 +1,10 @@
 <script lang="ts" setup>
 import { useRouter } from 'vue-router';
-import NavComponent from '../components/NavComponent.vue';
 import CardComponent from '../components/CardComponent.vue';
 import { useFilmeStore } from '../stores/filmesStore';
 import { useSerieStore } from '../stores/seriesStore';
 import { onMounted } from 'vue';
+import NavComponent from '../components/NavComponent.vue';
 import LoadComponent from '../components/LoadComponent.vue';
 
 const filmeStore = useFilmeStore();
@@ -14,15 +14,19 @@ const serieStore = useSerieStore();
 const router = useRouter();
 
 const goHomePage = () => {
-    router.push('/');
+    router.push({ name: 'Home' });
 };
 
 const goFilmesPage = () => {
-    router.push('/filmes');
+    router.push({ name: 'Filmes' });
 }
 
 const goSeriesPage = () => {
-    router.push('/series');
+    router.push({ name: 'Series' });
+};
+
+const goFavoritosPage = () => {
+    router.push({ name: 'Favoritos' });
 };
 
 const goDetalhesFilme = (id: number) => {
@@ -41,7 +45,12 @@ onMounted(() => {
 </script>
 
 <template>
-    <NavComponent @home-click="goHomePage()" @filmes-click="goFilmesPage()" @series-click="goSeriesPage()" />
+    <NavComponent
+        @home-click="goHomePage()"
+        @filmes-click="goFilmesPage()"
+        @series-click="goSeriesPage()"
+        @fav-click="goFavoritosPage()"
+    />
     <main class="container mt-5">
         <div v-if="filmeStore.loading" class="d-flex justify-content-center">
             <LoadComponent />
