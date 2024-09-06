@@ -2,8 +2,8 @@ import { createRouter, createWebHistory } from "vue-router";
 import Filmes from "../pages/filmes.vue";
 import Home from "../pages/home.vue";
 import Series from "../pages/series.vue";
-import Detalhes from "../pages/detalhes/[id].vue";
-
+import Filme from "../pages/detalhes/filme/[id].vue";
+import Serie from "../pages/detalhes/serie/[id].vue";
 
 const routes = [
     {
@@ -22,9 +22,14 @@ const routes = [
         component: Series
     },
     {
-        path: '/detalhes/:id/:tipo',
-        name: 'Detalhes',
-        component: Detalhes
+        path: '/filme/:id',
+        name: 'Detalhes-Filme',
+        component: Filme
+    },
+    {
+        path: '/serie/:id',
+        name: 'Detalhes-Serie',
+        component: Serie
     }
 ];
 

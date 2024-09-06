@@ -39,7 +39,7 @@ export const useFilmeStore = defineStore('filmeStore', {
             try {
                 const response = await api.get(`/movie/${id}`);
                 this.filme = response.data;
-                const trailerResponse = await api.get(`/movide/${id}/videos`);
+                const trailerResponse = await api.get(`/movie/${id}/videos`);
                 const trailer = trailerResponse.data.results.find((video: any) => video.type === 'Trailer' && video.site === 'Youtube');
                 if (trailer) {
                     this.filme.trailer_link = `https://www.youtube.com/watch?v=${trailer.key}`;

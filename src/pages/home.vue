@@ -26,11 +26,11 @@ const goSeriesPage = () => {
 };
 
 const goDetalhesFilme = (id: number) => {
-    router.push({ name: 'Detalhes', params: { id, tipo: 'filme'}});
+    router.push({ name: 'Detalhes-Filme', params: { id }});
 };
 
 const goDetalhesSerie = (id: number) => {
-    router.push({ name: 'Detalhes', params: { id, tipo: 'serie'}});
+    router.push({ name: 'Detalhes-Serie', params: { id }});
 };
 
 onMounted(() => {
