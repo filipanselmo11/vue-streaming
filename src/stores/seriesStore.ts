@@ -17,9 +17,16 @@ export const useSerieStore = defineStore('series', {
             overview: '',
             trailer_link: null as string | null
         },
+        favoritos: [] as Array<{
+            id: number,
+            poster_path: string,
+            first_air_date: string,
+            name: string
+        }>,
         currentPage: 1,
         totalPages: 1,
         loading: true,
+        favoritado: true,
     }),
     actions: {
         async fetchSeries(): Promise<void> {
@@ -51,6 +58,28 @@ export const useSerieStore = defineStore('series', {
             } finally {
                 this.loading = false;
             }
+        },
+
+        favoritarSerie(serie: any) {
+            const index = this.favoritos.findIndex(s => s.id === serie.id);
+            if (index === -1) {
+                this.favoritos.push(serie);
+                this.favoritado = true;
+                console.log('Serie adicionada aos favoritos ', serie);
+            }
+        },
+
+        desfavoritarSerie(serie: any) {
+            const index = this.favoritos.findIndex(s => s.id === serie.id);
+            if (index > -1) {
+                this.favoritos.splice(index, 1);
+                this.favoritado = false;
+                console.log('Serie removida dos favoritos ', serie);
+            }
+        },
+
+        isFavorito(serie: any) {
+            return this.favoritos.some(s => s.id === serie.id);
         }
     }
 });

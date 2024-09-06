@@ -33,6 +33,14 @@ const assistirTrailer = () => {
     }
 };
 
+const favoritarSerie = (serie: any) => {
+    serieStore.favoritarSerie(serie);
+};
+
+const desfavoritarSerie = (serie: any) => {
+    serieStore.desfavoritarSerie(serie);
+};
+
 onMounted(() => {
     const id = Number(route.params.id);
     serieStore.fetchSerieId(id);
@@ -45,25 +53,24 @@ onMounted(() => {
         @home-click="goHomePage()"
         @filmes-click="goFilmesPage()"
         @series-click="goSeriesPage()"
-        @fav-click="goFavoritosPage()"/>
+        @fav-click="goFavoritosPage()" />
     <main class="container my-4">
         <h1 class="text-center mb-4">
             Detalhes da Série
         </h1>
         <div v-if="serieStore.loading" class="d-flex justify-content-center">
-            <LoadComponent/>
+            <LoadComponent />
         </div>
         <div v-else>
             <div class="row">
                 <img
                     :src="'https://image.tmdb.org/t/p/w500' + serieStore.serie.backdrop_path"
                     class="img-fluid rounded shadow-sm"
-                    alt="Poster da Serie"
-                />
+                    alt="Poster da Serie" />
             </div>
             <div class="col-md-8">
                 <h2 class="text-primary">
-                    {{  serieStore.serie.name }}
+                    {{ serieStore.serie.name }}
                 </h2>
                 <p class="text-muted">
                     <strong>
@@ -75,9 +82,18 @@ onMounted(() => {
                 </p>
                 <div class="d-flex justify-content-start mt-3">
                     <button
+                        v-if="!serieStore.isFavorito(serieStore.serie)"
+                        @click="favoritarSerie(serieStore.serie)"
                         class="btn btn-outline-primary me-2"
                         type="button">
-                        Favoritar Série
+                            Favoritar
+                    </button>
+                    <button
+                        v-else
+                        @click="desfavoritarSerie(serieStore.serie)"
+                        class="btn btn-outline-secondary me-2"
+                        type="button">
+                            Desfavoritar
                     </button>
                     <button
                         @click="assistirTrailer()"

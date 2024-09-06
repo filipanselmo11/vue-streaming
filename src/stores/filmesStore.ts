@@ -17,9 +17,16 @@ export const useFilmeStore = defineStore('filmeStore', {
             overview: '',
             trailer_link: null as string | null
         },
+        favoritos: [] as Array<{
+            id: number,
+            poster_path: string,
+            release_date: string,
+            title: string
+        }>,
         currentPage: 1,
         totalPages: 1,
         loading: true,
+        favoritado: true,
     }),
     actions: {
         async fetchFilmes(): Promise<void> {
@@ -51,6 +58,28 @@ export const useFilmeStore = defineStore('filmeStore', {
             } finally {
                 this.loading = false;
             }
+        },
+
+        favoritarFilme(filme: any) {
+            const index = this.favoritos.findIndex(f => f.id === filme.id);
+            if (index === -1) {
+                this.favoritos.push(filme);
+                this.favoritado = true;
+                console.log('Filme adicionado aos favoritos ', filme);
+            }
+        },
+
+        desfavoritarFilme(filme: any) {
+            const index = this.favoritos.findIndex(f => f.id === filme.id);
+            if (index > -1) {
+                this.favoritos.splice(index, 1);
+                this.favoritado = false;
+                console.log('Filme removido dos favoritos ', filme);
+            }
+        },
+
+        isFavorito(filme: any) {
+            return this.favoritos.some(f => f.id === filme.id);
         }
     }
 });

@@ -10,7 +10,7 @@ const router = useRouter();
 const filmeStore = useFilmeStore();
 
 const goHomePage = () => {
-    router.push({ name: 'Home'});
+    router.push({ name: 'Home' });
 };
 
 const goFilmesPage = () => {
@@ -33,6 +33,15 @@ const assistirTrailer = () => {
     }
 };
 
+const favoritarFilme = (filme: any) => {
+    filmeStore.favoritarFilme(filme);
+};
+
+const desfavoritarFilme = (filme: any) => {
+    filmeStore.desfavoritarFilme(filme);
+};
+
+
 onMounted(() => {
     const id = Number(route.params.id);
     filmeStore.fetchFilmeId(id);
@@ -45,21 +54,20 @@ onMounted(() => {
         @home-click="goHomePage()"
         @filmes-click="goFilmesPage()"
         @series-click="goSeriesPage()"
-        @fav-click="goFavoritosPage()"/>
+        @fav-click="goFavoritosPage()" />
     <main class="container my-4">
         <h1 class="text-center mb-4">
             Detalhes do Filme
         </h1>
         <div v-if="filmeStore.loading" class="d-flex justify-content-center">
-            <LoadComponent/>
+            <LoadComponent />
         </div>
         <div v-else>
             <div class="row">
                 <img
                     :src="'https://image.tmdb.org/t/p/w500' + filmeStore.filme.backdrop_path"
                     class="img-fluid rounded shadow-sm"
-                    alt="Poster do filme"
-                >
+                    alt="Poster do filme">
             </div>
             <div class="col-md-8">
                 <h2 class="text-primary">
@@ -74,15 +82,25 @@ onMounted(() => {
                     {{ filmeStore.filme.overview }}
                 </p>
                 <div class="d-flex justify-content-start mt-3">
-                    <button class="btn btn-outline-primary me-2" type="button">
-                        Favoritar Filme
+                    <button
+                        v-if="!filmeStore.isFavorito(filmeStore.filme)"
+                        @click="favoritarFilme(filmeStore.filme)"
+                        class="btn btn-outline-primary me-2"
+                        type="button">
+                            Favoritar
+                    </button>
+                    <button
+                        v-else
+                        @click="desfavoritarFilme(filmeStore.filme)"
+                        class="btn btn-outline-secondary me-2"
+                        type="button">
+                            Desfavoritar
                     </button>
                     <button
                         @click="assistirTrailer()"
                         class="btn btn-outline-success"
-                        :disabled="!filmeStore.filme.trailer_link"
-                        type="button">
-                        Assistir Trailer
+                        :disabled="!filmeStore.filme.trailer_link" type="button">
+                            Assistir Trailer
                     </button>
                 </div>
             </div>
