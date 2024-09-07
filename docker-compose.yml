@@ -1,0 +1,13 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - VITE_TMDB_API_KEY=${VITE_TMDB_API_KEY}
+    environment:
+      - VITE_TMDB_API_KEY=${VITE_TMDB_API_KEY}
+    ports:
+      - "8080:4173"
+    env_file:
+      - .env
