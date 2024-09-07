@@ -65,7 +65,7 @@ onMounted(() => {
             <div class="row">
                 <img
                     :src="'https://image.tmdb.org/t/p/w500' + serieStore.serie.backdrop_path"
-                    class="img-fluid rounded shadow-sm"
+                    class="img-fluid rounded shadow-sm mb-md-0"
                     alt="Poster da Serie" />
             </div>
             <div class="col-md-8">
@@ -80,18 +80,18 @@ onMounted(() => {
                 <p class="text-muted">
                     {{ serieStore.serie.overview }}
                 </p>
-                <div class="d-flex justify-content-start mt-3">
+                <div class="d-flex flex-column flex-md-row justify-content-start mt-3">
                     <button
                         v-if="!serieStore.isFavorito(serieStore.serie)"
                         @click="favoritarSerie(serieStore.serie)"
-                        class="btn btn-outline-primary me-2"
+                        class="btn btn-outline-primary mb-2 me-md-2 mb-md-0"
                         type="button">
                             Favoritar
                     </button>
                     <button
                         v-else
                         @click="desfavoritarSerie(serieStore.serie)"
-                        class="btn btn-outline-secondary me-2"
+                        class="btn btn-outline-secondary mb-2 me-md-2 mb-2 mb-md-0"
                         type="button">
                             Desfavoritar
                     </button>

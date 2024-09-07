@@ -23,8 +23,6 @@ export const useFilmeStore = defineStore('filmeStore', {
             release_date: string,
             title: string
         }>,
-        currentPage: 1,
-        totalPages: 1,
         loading: true,
         favoritado: true,
     }),

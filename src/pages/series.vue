@@ -43,10 +43,10 @@ onMounted(() => {
         @fav-click="goFavoritosPage()"
     />
     <main class="container mt-5">
-        <h2 class="h2 mb-4">
+        <h2 class="h2 display-6">
             Séries:
         </h2>
-        <div class="row row-cols-md-4 row-cols-sm-2 row-cols-1 g-3">
+        <div class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-1 g-3">
             <div v-for="serie in serieStore.series" :key="serie.id" class="col">
                 <CardComponent :card="serie" @click-button="goDetalhesSerie(serie.id)"/>    
             </div>

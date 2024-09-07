@@ -42,6 +42,7 @@ const desfavoritarFilme = (filme: any) => {
 };
 
 
+
 onMounted(() => {
     const id = Number(route.params.id);
     filmeStore.fetchFilmeId(id);
@@ -66,7 +67,7 @@ onMounted(() => {
             <div class="row">
                 <img
                     :src="'https://image.tmdb.org/t/p/w500' + filmeStore.filme.backdrop_path"
-                    class="img-fluid rounded shadow-sm"
+                    class="img-fluid rounded shadow-sm mb-md-0"
                     alt="Poster do filme">
             </div>
             <div class="col-md-8">
@@ -81,18 +82,18 @@ onMounted(() => {
                 <p class="text-muted">
                     {{ filmeStore.filme.overview }}
                 </p>
-                <div class="d-flex justify-content-start mt-3">
+                <div class="d-flex flex-column flex-md-row justify-content-start mt-3">
                     <button
                         v-if="!filmeStore.isFavorito(filmeStore.filme)"
                         @click="favoritarFilme(filmeStore.filme)"
-                        class="btn btn-outline-primary me-2"
+                        class="btn btn-outline-primary mb-2 me-md-2 mb-md-0"
                         type="button">
                             Favoritar
                     </button>
                     <button
                         v-else
                         @click="desfavoritarFilme(filmeStore.filme)"
-                        class="btn btn-outline-secondary me-2"
+                        class="btn btn-outline-secondary mb-2 me-md-2 mb-2 mb-md-0"
                         type="button">
                             Desfavoritar
                     </button>

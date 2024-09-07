@@ -57,10 +57,10 @@ onMounted(() => {
         </div>
         <div v-else>
             <section id="filmes">
-                <h2 class="h2">
-                    Filmes
+                <h2 class="h2 display-6">
+                    Filmes:
                 </h2>
-                <div class="row row-cols-md-4 row-cols-sm-2 row-cols-1 g-3">
+                <div class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-1 g-3">
                     <div v-for="filme in filmeStore.filmes" :key="filme.id" class="col">
                         <CardComponent :card="filme" @click-button="goDetalhesFilme(filme.id)"/>
                     </div>
@@ -72,10 +72,10 @@ onMounted(() => {
         </div>
         <div v-else class="mt-4">
             <section id="series">
-                <h2 class="h2">
-                    Séries
+                <h2 class="h2 display-6">
+                    Séries:
                 </h2>
-                <div class="row row-cols-md-4 row-cols-sm-2 row-cols-1 g-3">
+                <div class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-1 g-3">
                     <div v-for="serie in serieStore.series" :key="serie.id" class="col">
                         <CardComponent :card="serie" @click-button="goDetalhesSerie(serie.id)"/>
                     </div>

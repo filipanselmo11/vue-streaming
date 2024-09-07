@@ -7,9 +7,6 @@ import NavComponent from '../components/NavComponent.vue';
 
 const filmeStore = useFilmeStore();
 
-// const currentPage = computed(() => filmeStore.currentPage);
-// const totalPages = computed(() => filmeStore.totalPages);
-
 const router = useRouter();
 
 const goFilmesPage = () => {
@@ -30,6 +27,7 @@ const goDetalhesFilme = (id: number) => {
     router.push({ name: 'Detalhes-Filme', params: { id }});
 };
 
+
 onMounted(() => {
     filmeStore.fetchFilmes();
 });
@@ -44,10 +42,10 @@ onMounted(() => {
         @fav-click="goFavoritosPage()"
     /> 
     <main class="container mt-5">
-        <h2 class="h2 mb-4">
+        <h2 class="h2 display-6">
             Filmes:
         </h2>
-        <div class="row row-cols-md-4 row-cols-sm-2 row-cols-1 g-3">
+        <div class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-1 g-3">
             <div v-for="filme in filmeStore.filmes" :key="filme.id" class="col">
                 <CardComponent :card="filme" @click-button="goDetalhesFilme(filme.id)"/>
             </div>
