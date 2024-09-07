@@ -44,14 +44,18 @@ export const useFilmeStore = defineStore('filmeStore', {
             try {
                 const response = await api.get(`/movie/${id}`);
                 this.filme = response.data;
+                console.log('FILME:', this.filme);
+                
                 const trailerResponse = await api.get(`/movie/${id}/videos`);
-                const trailer = trailerResponse.data.results.find((video: any) => video.type === 'Trailer' && video.site === 'Youtube');
+                console.log('Trailer Response:', trailerResponse.data);
+                
+                const trailer = trailerResponse.data.results.find((video: any) => video.type === 'Trailer' && video.site === 'YouTube');
                 if (trailer) {
                     this.filme.trailer_link = `https://www.youtube.com/watch?v=${trailer.key}`;
                 } else {
                     this.filme.trailer_link = null;
                 }
-            } catch(error) {
+            } catch (error) {
                 console.error('Erro ao carregar filme por id', error);
             } finally {
                 this.loading = false;

@@ -46,15 +46,19 @@ export const useSerieStore = defineStore('series', {
             try {
                 const response = await api.get(`/tv/${id}`);
                 this.serie = response.data;
+                console.log('SERIE:', this.serie);
+                
                 const trailerResponse = await api.get(`/tv/${id}/videos`);
-                const trailer = trailerResponse.data.results.find((video: any) => video.type === 'Trailer' && video.site === 'Youtube');
+                console.log('Trailer Response:', trailerResponse.data);
+                
+                const trailer = trailerResponse.data.results.find((video: any) => video.type === 'Trailer' && video.site === 'YouTube');
                 if (trailer) {
                     this.serie.trailer_link = `https://www.youtube.com/watch?v=${trailer.key}`;
                 } else {
                     this.serie.trailer_link = null;
                 }
-            } catch(error) {
-                console.error('Erro ao carregar série ', error);
+            } catch (error) {
+                console.error('Erro ao carregar série', error);
             } finally {
                 this.loading = false;
             }
